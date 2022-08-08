@@ -49,7 +49,7 @@ int cmp(const void *aa, const void*bb){
 	if(fabs((a.new_price-a.old_price) - (b.new_price-b.old_price))<0.01){
 		if(a.product_type == b.product_type){
 			if(0 == strcmp(a.product_name, b.product_name)){
-				return a.id-b.id;
+				return b.id-a.id;
 			}
 			else{
 				return strcmp(a.product_name, b.product_name);
@@ -79,6 +79,7 @@ void read_from_bin(){
 	struct Product a;
 	do{
 		e = fscanf(f, "%lf %lf %d %c %s", &a.old_price, &a.new_price, &a.id, &a.product_type, &a.product_name);
+		if(e <= 0){break;}
 		printf  ("old_price: %5.2lf new_price: %5.2lf id: %2d type: %c name: %s\n", a.old_price, a.new_price, a.id, a.product_type, a.product_name);
 	}while(e > 0);
 
